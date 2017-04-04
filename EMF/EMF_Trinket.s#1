@@ -4958,16 +4958,6 @@ Marquardt, Siemens, C&amp;K, ITT, and others&lt;p&gt;
 </library>
 <library name="lipoly_backpack">
 <packages>
-<package name="LIPOLY_BATTERY">
-<wire x1="-10.16" y1="-12.7" x2="10.16" y2="-12.7" width="0.127" layer="19"/>
-<wire x1="10.16" y1="-12.7" x2="10.16" y2="10.16" width="0.127" layer="19"/>
-<wire x1="10.16" y1="10.16" x2="-10.16" y2="10.16" width="0.127" layer="19"/>
-<wire x1="-10.16" y1="10.16" x2="-10.16" y2="-12.7" width="0.127" layer="19"/>
-<pad name="VBAT-" x="-2.54" y="7.62" drill="0.8" shape="offset" rot="R90"/>
-<pad name="VBAT+" x="2.54" y="7.62" drill="0.8" shape="offset" rot="R90"/>
-<dimension x1="-10.16" y1="-12.7" x2="10.16" y2="-12.7" x3="0" y3="-15.24" textsize="1.27" layer="25"/>
-<dimension x1="10.16" y1="-12.7" x2="10.16" y2="10.16" x3="12.7" y3="-1.27" textsize="1.27" layer="25"/>
-</package>
 <package name="LIPOLY_BACKPACK">
 <pad name="BAT+" x="-5.08" y="-5.08" drill="0.8"/>
 <pad name="GND" x="-5.08" y="-2.54" drill="0.8"/>
@@ -4985,8 +4975,34 @@ Marquardt, Siemens, C&amp;K, ITT, and others&lt;p&gt;
 <smd name="VBAT-" x="5.08" y="5.08" dx="1.27" dy="0.635" layer="1" rot="R90"/>
 <smd name="VBAT+" x="2.54" y="5.08" dx="1.27" dy="0.635" layer="1" rot="R90"/>
 </package>
+<package name="LIPOLY_BATTERY">
+<wire x1="-10.16" y1="-12.7" x2="10.16" y2="-12.7" width="0.127" layer="19"/>
+<wire x1="10.16" y1="-12.7" x2="10.16" y2="10.16" width="0.127" layer="19"/>
+<wire x1="10.16" y1="10.16" x2="-10.16" y2="10.16" width="0.127" layer="19"/>
+<wire x1="-10.16" y1="10.16" x2="-10.16" y2="-12.7" width="0.127" layer="19"/>
+<pad name="VBAT-" x="-2.54" y="7.62" drill="0.8" shape="offset" rot="R90"/>
+<pad name="VBAT+" x="2.54" y="7.62" drill="0.8" shape="offset" rot="R90"/>
+<dimension x1="-10.16" y1="-12.7" x2="10.16" y2="-12.7" x3="0" y3="-15.24" textsize="1.27" layer="25"/>
+<dimension x1="10.16" y1="-12.7" x2="10.16" y2="10.16" x3="12.7" y3="-1.27" textsize="1.27" layer="25"/>
+</package>
 </packages>
 <symbols>
+<symbol name="LIPOLY_BACKPACK">
+<pin name="BAT+" x="-12.7" y="-5.08" length="middle"/>
+<pin name="GND" x="-12.7" y="-2.54" length="middle"/>
+<pin name="USB" x="-12.7" y="0" length="middle"/>
+<pin name="SW2" x="-5.08" y="12.7" length="middle" rot="R270"/>
+<pin name="SW1" x="-2.54" y="12.7" length="middle" rot="R270"/>
+<text x="0" y="-5.08" size="1.27" layer="95">LiPoly
+Backpack</text>
+<rectangle x1="0" y1="0" x2="7.62" y2="7.62" layer="90"/>
+<wire x1="-7.62" y1="-7.62" x2="-7.62" y2="7.62" width="0.254" layer="94"/>
+<wire x1="-7.62" y1="7.62" x2="7.62" y2="7.62" width="0.254" layer="94"/>
+<wire x1="7.62" y1="7.62" x2="7.62" y2="-7.62" width="0.254" layer="94"/>
+<wire x1="7.62" y1="-7.62" x2="-7.62" y2="-7.62" width="0.254" layer="94"/>
+<pin name="VBAT+" x="2.54" y="12.7" length="middle" rot="R270"/>
+<pin name="VBAT-" x="5.08" y="12.7" length="middle" rot="R270"/>
+</symbol>
 <symbol name="LIPOLY_BATTERY">
 <wire x1="-10.16" y1="-10.16" x2="-10.16" y2="10.16" width="0.254" layer="94"/>
 <wire x1="-10.16" y1="10.16" x2="10.16" y2="10.16" width="0.254" layer="94"/>
@@ -4999,40 +5015,8 @@ Marquardt, Siemens, C&amp;K, ITT, and others&lt;p&gt;
 <text x="-2.54" y="-7.62" size="1.27" layer="95">LiPoly
 500mah</text>
 </symbol>
-<symbol name="LIPOLY_BACKPACK">
-<pin name="BAT+" x="-12.7" y="-5.08" length="middle"/>
-<pin name="GND" x="-12.7" y="-2.54" length="middle"/>
-<pin name="USB" x="-12.7" y="0" length="middle"/>
-<pin name="SW2" x="-5.08" y="12.7" length="middle" rot="R270"/>
-<pin name="SW1" x="-2.54" y="12.7" length="middle" rot="R270"/>
-<text x="0" y="-5.08" size="1.27" layer="95">LiPoly
-Backpack</text>
-<wire x1="-7.62" y1="-7.62" x2="-7.62" y2="7.62" width="0.254" layer="94"/>
-<wire x1="-7.62" y1="7.62" x2="7.62" y2="7.62" width="0.254" layer="94"/>
-<wire x1="7.62" y1="7.62" x2="7.62" y2="-7.62" width="0.254" layer="94"/>
-<wire x1="7.62" y1="-7.62" x2="-7.62" y2="-7.62" width="0.254" layer="94"/>
-<pin name="VBAT+" x="2.54" y="12.7" length="middle" rot="R270"/>
-<pin name="VBAT-" x="5.08" y="12.7" length="middle" rot="R270"/>
-<rectangle x1="0" y1="0" x2="7.62" y2="7.62" layer="97"/>
-</symbol>
 </symbols>
 <devicesets>
-<deviceset name="LIPOLY_BATTERY">
-<gates>
-<gate name="G$1" symbol="LIPOLY_BATTERY" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="LIPOLY_BATTERY">
-<connects>
-<connect gate="G$1" pin="VBAT+" pad="VBAT+"/>
-<connect gate="G$1" pin="VBAT-" pad="VBAT-"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
 <deviceset name="LIPOLY_BACKPACK">
 <gates>
 <gate name="G$1" symbol="LIPOLY_BACKPACK" x="0" y="0"/>
@@ -5045,6 +5029,22 @@ Backpack</text>
 <connect gate="G$1" pin="SW1" pad="SW1"/>
 <connect gate="G$1" pin="SW2" pad="SW2"/>
 <connect gate="G$1" pin="USB" pad="USB"/>
+<connect gate="G$1" pin="VBAT+" pad="VBAT+"/>
+<connect gate="G$1" pin="VBAT-" pad="VBAT-"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="LIPOLY_BATTERY">
+<gates>
+<gate name="G$1" symbol="LIPOLY_BATTERY" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="LIPOLY_BATTERY">
+<connects>
 <connect gate="G$1" pin="VBAT+" pad="VBAT+"/>
 <connect gate="G$1" pin="VBAT-" pad="VBAT-"/>
 </connects>
@@ -5098,9 +5098,9 @@ Backpack</text>
 <part name="GND5" library="supply1" deviceset="GND" device=""/>
 <part name="P+1" library="supply1" deviceset="VCC" device=""/>
 <part name="P+2" library="supply1" deviceset="VCC" device=""/>
+<part name="U$2" library="lipoly_backpack" deviceset="LIPOLY_BACKPACK" device=""/>
 <part name="P+4" library="supply1" deviceset="VCC" device=""/>
 <part name="U$4" library="lipoly_backpack" deviceset="LIPOLY_BATTERY" device=""/>
-<part name="U$2" library="lipoly_backpack" deviceset="LIPOLY_BACKPACK" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -5178,9 +5178,9 @@ Backpack</text>
 <instance part="GND5" gate="1" x="30.48" y="-12.7"/>
 <instance part="P+1" gate="VCC" x="25.4" y="35.56" rot="R90"/>
 <instance part="P+2" gate="VCC" x="91.44" y="17.78" rot="R90"/>
+<instance part="U$2" gate="G$1" x="53.34" y="-5.08"/>
 <instance part="P+4" gate="VCC" x="88.9" y="40.64" rot="R270"/>
 <instance part="U$4" gate="G$1" x="73.66" y="0"/>
-<instance part="U$2" gate="G$1" x="53.34" y="-5.08"/>
 </instances>
 <busses>
 </busses>
@@ -5427,8 +5427,8 @@ Backpack</text>
 <wire x1="30.48" y1="30.48" x2="38.1" y2="30.48" width="0.1524" layer="91"/>
 <pinref part="GND5" gate="1" pin="GND"/>
 <wire x1="30.48" y1="-10.16" x2="30.48" y2="-7.62" width="0.1524" layer="91"/>
-<junction x="30.48" y="-7.62"/>
 <pinref part="U$2" gate="G$1" pin="GND"/>
+<junction x="30.48" y="-7.62"/>
 </segment>
 <segment>
 <pinref part="GND3" gate="1" pin="GND"/>
@@ -5549,9 +5549,9 @@ Backpack</text>
 </net>
 <net name="N$27" class="0">
 <segment>
+<pinref part="U$2" gate="G$1" pin="SW1"/>
 <pinref part="S1" gate="1" pin="S"/>
 <wire x1="50.8" y1="7.62" x2="50.8" y2="12.7" width="0.1524" layer="91"/>
-<pinref part="U$2" gate="G$1" pin="SW1"/>
 </segment>
 </net>
 <net name="N$29" class="0">
@@ -5559,17 +5559,17 @@ Backpack</text>
 <pinref part="S1" gate="1" pin="P"/>
 <wire x1="40.64" y1="12.7" x2="40.64" y2="10.16" width="0.1524" layer="91"/>
 <wire x1="40.64" y1="10.16" x2="48.26" y2="10.16" width="0.1524" layer="91"/>
-<wire x1="48.26" y1="10.16" x2="48.26" y2="7.62" width="0.1524" layer="91"/>
 <pinref part="U$2" gate="G$1" pin="SW2"/>
+<wire x1="48.26" y1="10.16" x2="48.26" y2="7.62" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$36" class="0">
 <segment>
+<pinref part="U$2" gate="G$1" pin="VBAT-"/>
 <wire x1="58.42" y1="7.62" x2="58.42" y2="17.78" width="0.1524" layer="91"/>
 <pinref part="U$4" gate="G$1" pin="VBAT-"/>
 <wire x1="58.42" y1="17.78" x2="71.12" y2="17.78" width="0.1524" layer="91"/>
 <wire x1="71.12" y1="17.78" x2="71.12" y2="15.24" width="0.1524" layer="91"/>
-<pinref part="U$2" gate="G$1" pin="VBAT-"/>
 </segment>
 </net>
 <net name="N$37" class="0">
@@ -5577,8 +5577,8 @@ Backpack</text>
 <pinref part="U$4" gate="G$1" pin="VBAT+"/>
 <wire x1="76.2" y1="15.24" x2="76.2" y2="20.32" width="0.1524" layer="91"/>
 <wire x1="76.2" y1="20.32" x2="55.88" y2="20.32" width="0.1524" layer="91"/>
-<wire x1="55.88" y1="20.32" x2="55.88" y2="7.62" width="0.1524" layer="91"/>
 <pinref part="U$2" gate="G$1" pin="VBAT+"/>
+<wire x1="55.88" y1="20.32" x2="55.88" y2="7.62" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$33" class="0">
