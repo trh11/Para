@@ -8,6 +8,20 @@ int unsigned long V2;
 int readings = 200;                                 //number of measurements to average over.
 int LED[10]={3,4,5,6,8,14,15,16,17,18};             //the sequential pins assigned to the LED bar graph.
 
+void start_Up()                                     //the startup sequence to show device is operational.
+{
+  for(int i = 0; i < 5; i++)                       
+  {
+    for(int j = 0; j < 10; j++)                     //clear all LEDs
+    {
+      digitalWrite(LED[j], LOW);
+    }
+    digitalWrite(LED[i], HIGH);                     //light up LEDS 0-4 incrementing
+    digitalWrite(LED[9-i], HIGH);                   //and LEDs 9-5 decrementing.
+    delay(50);                                      //keep LEDs on for .05 sec.
+  }
+}
+
 int re_Bin(int x)                                   //function that reassigns a log2(x) value such that 
 {                                                   //small measurements are higher resolution and 
   if (x <= 1){return 10;}                           //higher measurement are lower resolution.
@@ -30,12 +44,13 @@ void setup()
   pinMode(A7, INPUT);                               //'' A7 ''.
   analogRead(A6);                                   //initializes pin A6 external reference.
   analogRead(A7);                                   //'' A7 ''.
-  delay(500);                                       //allow for external reference to settle.
 
   for(int i = 0; i < 10; i++)                       //sets all LED pins to output only.
   {
     pinMode(LED[i],OUTPUT);
   }
+
+  start_Up();
 }
 
 void loop() 
