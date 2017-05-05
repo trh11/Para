@@ -1,12 +1,12 @@
 #include <SPI.h>
 #include <SD.h>
 
-const int chipSelect = 10;
-SdFile root;
+const int chipSelect = 10;                          //changes CS pin to digital 10 as per trinket pinout.
+SdFile root;                                        //microSD root.
 boolean card_status;
-boolean new_open;
-String fileName;
-String dataString;
+boolean new_open;                                   //initializes flag for a newly opend file.
+String fileName;                                    //file name variable. 
+String dataString;                                  //data string variable.
 
 unsigned long last = 0;
 int n = 0;
@@ -51,14 +51,14 @@ int re_Bin(int x)                                   //function that reassigns a 
   if (x >= 513 and x <= 1023){return 9;}
 }
 
-int numberFile()
-{
-  int m = 1;
-  while(SD.exists("data"+String(m)+".csv") == true)
+int numberFile()                                    //determines the number appended to the file name.
+{ 
+int m = 1;                                          //assumes file number appends 1 in case of empty folder.
+  while(SD.exists("data"+String(m)+".csv") == true) //iterate through files until the last is reacehed.
   {
    m++;
   }
-  return(m);
+  return(m);                                        //return file number to append.
 }
 
 void setup() 
@@ -70,8 +70,6 @@ void setup()
   analogRead(A7);                                   //'' A7 ''.
 
   pinMode(9,INPUT_PULLUP);                          //sets pin 9 as an active low digital input.
-  
-  Serial.begin(9600);
 
   for(int i = 0; i < 10; i++)                       //sets all LED pins to output only.
   {
@@ -80,10 +78,9 @@ void setup()
 
   start_Up();
   
-  if (!SD.begin(chipSelect)) 
+  if(!SD.begin(chipSelect))                         //alert the user if sd card not present.
   {
-    Serial.println("Card failed, or not present");
-    for(int k = 0; k < 6; k++)
+    for(int k = 0; k < 6; k++)                      //flash midle LEDs five times.
     {
       digitalWrite(LED[4],HIGH);
       digitalWrite(LED[5],HIGH);
@@ -92,12 +89,12 @@ void setup()
       digitalWrite(LED[5],LOW);
       delay(100);
     }
-    card_status = false;
+    card_status = false;                            //set microSD false flag if not present.
     return;
   }
-  else{card_status = true;}
+  else{card_status = true;}                         //set microSD true flag otherwise.
 
-  new_open = true;
+  new_open = true;                                  //set new open flag true.
 }
 
 void loop() 
@@ -112,24 +109,24 @@ void loop()
     VH2 = VH2 + VHin;                               //running sum of high freq.
     n++;                                            //tallies measurements.
   }
-  if(n >= readings)                                //once target # readings reached 
+  if(n >= readings)                                 //once target # readings reached 
   {
-    if(card_status == true)
+    if(card_status == true)                         //if a microSD is present.
     {
-      if(digitalRead(9) == LOW)
+      if(digitalRead(9) == LOW)                     //if record switch is toggled on.
       {
-        if(new_open == true)
+        if(new_open == true)                        //if the record file is not newly opened.
         {
-          fileName = "data"+String(numberFile())+".csv";
-          new_open = false;
+          fileName = "data"+String(numberFile())+".csv";  //set the new file name.
+          new_open = false;                               //set new open flag false.
         }
-        File dataFile = SD.open(fileName, FILE_WRITE);
-        dataString = String(VL2/n)+", "+String(VH2/n);
-        dataFile.println(dataString);
-        Serial.println(dataString);
-        dataFile.close();
+        File dataFile = SD.open(fileName, FILE_WRITE);    //open or create file with file name.
+        dataString = String(VL2/n)+", "+String(VH2/n);    //turn data into a string to write to file.
+        dataFile.println(dataString);                     //append string to file.
+//        Serial.println(dataString);                     
+        dataFile.close();                                 //close file to avoid corruption.
       }
-      else{new_open = true;}
+      else{new_open = true;}                        //set new open flag false if record swtich is toggled off.
     }
     V2 = max(VL2,VH2);                              //choose highest value between low and high.
     int Vout = V2/n;                                //average the highest sum
