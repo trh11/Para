@@ -1,3 +1,13 @@
+#include <SPI.h>
+#include <SD.h>
+
+const int chipSelect = 10;
+SdFile root;
+boolean card_status;
+boolean new_open;
+String fileName;
+String dataString;
+
 unsigned long last = 0;
 int n = 0;
 int VLin;
@@ -20,6 +30,10 @@ void start_Up()                                     //the startup sequence to sh
     digitalWrite(LED[9-i], HIGH);                   //and LEDs 9-5 decrementing.
     delay(50);                                      //keep LEDs on for .05 sec.
   }
+  for(int j = 0; j < 10; j++)                     //clear all LEDs
+  {
+    digitalWrite(LED[j], LOW);
+  }
 }
 
 int re_Bin(int x)                                   //function that reassigns a log2(x) value such that 
@@ -37,6 +51,16 @@ int re_Bin(int x)                                   //function that reassigns a 
   if (x >= 513 and x <= 1023){return 9;}
 }
 
+int numberFile()
+{
+  int m = 1;
+  while(SD.exists("data"+String(m)+".csv") == true)
+  {
+   m++;
+  }
+  return(m);
+}
+
 void setup() 
 {
   analogReference(EXTERNAL);                        //references readings to 1.056V/1024 resolution.
@@ -45,12 +69,35 @@ void setup()
   analogRead(A6);                                   //initializes pin A6 external reference.
   analogRead(A7);                                   //'' A7 ''.
 
+  pinMode(9,INPUT_PULLUP);                          //sets pin 9 as an active low digital input.
+  
+  Serial.begin(9600);
+
   for(int i = 0; i < 10; i++)                       //sets all LED pins to output only.
   {
     pinMode(LED[i],OUTPUT);
   }
 
   start_Up();
+  
+  if (!SD.begin(chipSelect)) 
+  {
+    Serial.println("Card failed, or not present");
+    for(int k = 0; k < 6; k++)
+    {
+      digitalWrite(LED[4],HIGH);
+      digitalWrite(LED[5],HIGH);
+      delay(100);
+      digitalWrite(LED[4],LOW);
+      digitalWrite(LED[5],LOW);
+      delay(100);
+    }
+    card_status = false;
+    return;
+  }
+  else{card_status = true;}
+
+  new_open = true;
 }
 
 void loop() 
@@ -65,8 +112,25 @@ void loop()
     VH2 = VH2 + VHin;                               //running sum of high freq.
     n++;                                            //tallies measurements.
   }
-  if (n >= readings)                                //once target # readings reached 
+  if(n >= readings)                                //once target # readings reached 
   {
+    if(card_status == true)
+    {
+      if(digitalRead(9) == LOW)
+      {
+        if(new_open == true)
+        {
+          fileName = "data"+String(numberFile())+".csv";
+          new_open = false;
+        }
+        File dataFile = SD.open(fileName, FILE_WRITE);
+        dataString = String(VL2/n)+", "+String(VH2/n);
+        dataFile.println(dataString);
+        Serial.println(dataString);
+        dataFile.close();
+      }
+      else{new_open = true;}
+    }
     V2 = max(VL2,VH2);                              //choose highest value between low and high.
     int Vout = V2/n;                                //average the highest sum
     int bar_Delimeter = re_Bin(Vout);               //re-bin reading for easiest display.
