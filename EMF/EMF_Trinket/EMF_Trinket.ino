@@ -126,8 +126,10 @@ void loop()
           new_open = false;                                   //set new open flag false.
         }
         File dataFile = SD.open(fileName, FILE_WRITE);        //open or create file with file name.
-        //create comma separated string of measurements and timestamp to write to file.
-        dataString = String(timeStamp)+", "+String(VL2/n)+", "+String(VH2/n);
+        dataString =                                          //create comma separated string of measurements 
+          String(timeStamp)+                                  //and timestamp to write to file.
+          ", "+String(VL2/n)+
+          ", "+String(VH2/n);
         dataFile.println(dataString);                         //append string to file.
 //        Serial.println(dataString);                     
         dataFile.close();                                     //close file to avoid corruption.
